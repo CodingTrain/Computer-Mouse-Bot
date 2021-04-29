@@ -8,9 +8,12 @@ PGraphics canvas;
 Robot robot;
 MousePoint mouse, pmouse;
 
+String name = "@shiffman";
+
 long now = 0;
 
-int waitTime = 15 * 60 * 1000;
+int minutes = 1;
+int waitTime = minutes * 60 * 1000;
 
 boolean tweet = false;
 
@@ -28,7 +31,7 @@ class MousePoint {
 }
 
 
-float scaleDown = 0.25;
+float scaleDown = 0.5;
 
 void settings() {
   size(int(displayWidth * scaleDown), int(displayHeight * scaleDown));
@@ -51,25 +54,24 @@ void setup() {
 }
 
 void draw() {
+  blendMode(ADD);
   scale(scaleDown);
   if (mouse != null && pmouse != null && pmouse != mouse) {
-    stroke(255, 100);
-    strokeWeight(4);
-    line(mouse.x, mouse.y, pmouse.x, pmouse.y);
+    tint(255, 50);
+    float scl = 0.25;
+    image(cursor, mouse.x - 50 * scl, mouse.y - 40 * scl, 280 * scl, 400 * scl);
   }
 
   if (millis() - now > waitTime) {
-    imageMode(CORNER);
-    float scl = 0.25;
-    image(cursor, mouse.x - 50 * scl, mouse.y - 40 * scl, 280 * scl, 400 * scl);
-    save("cursor.png");
-    GetRequest get = new GetRequest("http://localhost:3000/mouse/" + mouseX + "/" + mouseY); 
+    //save("cursor.png");
+    GetRequest get = new GetRequest("http://localhost:3000/mouse/" + mouseX + "/" + mouseY + "/" + name + "/" + minutes); 
     get.send();
     println("Reponse Content: " + get.getContent());
     println("Reponse Content-Length Header: " + get.getHeader("Content-Length"));
     tweet = false;
     background(0);
     now = millis();
+    exit();
   }
   trackMouse();
 }
