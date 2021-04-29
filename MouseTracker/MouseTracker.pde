@@ -12,7 +12,7 @@ String name = "@shiffman";
 
 long now = 0;
 
-int minutes = 1;
+int minutes = 5;
 int waitTime = minutes * 60 * 1000;
 
 boolean tweet = false;
@@ -63,7 +63,7 @@ void draw() {
   }
 
   if (millis() - now > waitTime) {
-    //save("cursor.png");
+    save("mouse.png");
     GetRequest get = new GetRequest("http://localhost:3000/mouse/" + mouseX + "/" + mouseY + "/" + name + "/" + minutes); 
     get.send();
     println("Reponse Content: " + get.getContent());
@@ -71,7 +71,6 @@ void draw() {
     tweet = false;
     background(0);
     now = millis();
-    exit();
   }
   trackMouse();
 }
