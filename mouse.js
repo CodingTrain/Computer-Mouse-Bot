@@ -34,53 +34,53 @@ const upload = new Twitter({
   access_token_secret: process.env.TOKEN_SECRET,
 });
 
-app.post('/mice', async (request, response) => {
+app.post('/mouse', async (request, response) => {
   let { x, y, name, minutes, base64 } = request.body;
-  try {
-    const media = await upload.post('media/upload', {
-      media_data: base64,
-    });
-    const alt = await upload.post('media/metadata/create', {
-      media_id: media.media_id_string,
-      alt_text: {
-        text: `Visualization of mouse path ending at ${x},${y}`,
-      },
-    });
-    const thetime =
-      dateFormat('mediumDate') + ' ' + dateFormat('longTime');
-    const tweet = await client.post('statuses/update', {
-      status: `${minutes} minutes of mouse movements from ${name} at ${thetime}`,
-      media_ids: [media.media_id_string],
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  // try {
+  //   const media = await upload.post('media/upload', {
+  //     media_data: base64,
+  //   });
+  //   const alt = await upload.post('media/metadata/create', {
+  //     media_id: media.media_id_string,
+  //     alt_text: {
+  //       text: `Visualization of mouse path ending at ${x},${y}`,
+  //     },
+  //   });
+  //   const thetime =
+  //     dateFormat('mediumDate') + ' ' + dateFormat('longTime');
+  //   const tweet = await client.post('statuses/update', {
+  //     status: `${minutes} minutes of mouse movements from ${name} at ${thetime}`,
+  //     media_ids: [media.media_id_string],
+  //   });
+  // } catch (error) {
+  //   console.error(error);
+  // }
   response.json({ status: { name, mouseX: x, mouseY: y } });
 });
 
-app.get('/mouse/:x/:y/:name/:minutes', async (request, response) => {
-  let { x, y, name, minutes } = request.params;
-  try {
-    const b64content = fs.readFileSync('MouseTracker/mouse.png', {
-      encoding: 'base64',
-    });
-    const media = await upload.post('media/upload', {
-      media_data: b64content,
-    });
-    const alt = await upload.post('media/metadata/create', {
-      media_id: media.media_id_string,
-      alt_text: {
-        text: `Visualization of mouse path ending at ${x},${y}`,
-      },
-    });
-    const thetime =
-      dateFormat('mediumDate') + ' ' + dateFormat('longTime');
-    const tweet = await client.post('statuses/update', {
-      status: `${minutes} minutes of mouse movements from ${name} at ${thetime}`,
-      media_ids: [media.media_id_string],
-    });
-  } catch (error) {
-    console.error(error);
-  }
-  response.json({ status: { name, mouseX: x, mouseY: y } });
-});
+// app.get('/mouse/:x/:y/:name/:minutes', async (request, response) => {
+//   let { x, y, name, minutes } = request.params;
+//   try {
+//     const b64content = fs.readFileSync('MouseTracker/mouse.png', {
+//       encoding: 'base64',
+//     });
+//     const media = await upload.post('media/upload', {
+//       media_data: b64content,
+//     });
+//     const alt = await upload.post('media/metadata/create', {
+//       media_id: media.media_id_string,
+//       alt_text: {
+//         text: `Visualization of mouse path ending at ${x},${y}`,
+//       },
+//     });
+//     const thetime =
+//       dateFormat('mediumDate') + ' ' + dateFormat('longTime');
+//     const tweet = await client.post('statuses/update', {
+//       status: `${minutes} minutes of mouse movements from ${name} at ${thetime}`,
+//       media_ids: [media.media_id_string],
+//     });
+//   } catch (error) {
+//     console.error(error);
+//   }
+//   response.json({ status: { name, mouseX: x, mouseY: y } });
+// });
