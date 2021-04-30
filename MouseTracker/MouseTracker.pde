@@ -9,7 +9,7 @@ Robot robot;
 MousePoint mouse, pmouse;
 
 String name = "@shiffman";
-int minutes = 30;
+int minutes = 20;
 
 long now = 0;
 int waitTime = minutes * 60 * 1000;
@@ -30,7 +30,7 @@ class MousePoint {
 }
 
 
-float scaleDown = 0.5;
+float scaleDown = 1;
 
 void settings() {
   size(int(displayWidth * scaleDown), int(displayHeight * scaleDown));

@@ -2,15 +2,17 @@
   "name": "mousebot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "mouse.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node mouse.js",
+    "scrape": "node downloader.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "choochootweets": "^0.0.5",
+    "cors": "^2.8.5",
     "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "request": "^2.88.2",
