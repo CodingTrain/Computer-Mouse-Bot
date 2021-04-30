@@ -5,10 +5,9 @@ const dateFormat = require('dateformat');
 
 const express = require('express');
 const fs = require('fs');
-const request = require('request');
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 
 app.listen(3000, () => console.log('listening at 3000'));
 app.use(express.json({ limit: '1mb' }));

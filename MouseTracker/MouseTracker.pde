@@ -9,7 +9,7 @@ Robot robot;
 MousePoint mouse, pmouse;
 
 String name = "@shiffman";
-int minutes = 20;
+int minutes = 1;
 
 long now = 0;
 int waitTime = minutes * 60 * 1000;
@@ -57,13 +57,13 @@ void draw() {
   scale(scaleDown);
   if (mouse != null && pmouse != null && pmouse != mouse) {
     tint(255, 50);
-    float scl = 0.25;
+    float scl = 0.1;
     image(cursor, mouse.x - 50 * scl, mouse.y - 40 * scl, 280 * scl, 400 * scl);
   }
 
   if (millis() - now > waitTime) {
     save("mouse.png");
-    GetRequest get = new GetRequest("http://localhost:3000/mouse/" + mouseX + "/" + mouseY + "/" + name + "/" + minutes); 
+    GetRequest get = new GetRequest("https://mouse-bot-server.glitch.me/mouse/" + mouseX + "/" + mouseY + "/" + name + "/" + minutes); 
     get.send();
     println("Reponse Content: " + get.getContent());
     println("Reponse Content-Length Header: " + get.getHeader("Content-Length"));

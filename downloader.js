@@ -1,3 +1,8 @@
+const request = require('request');
+const dateFormat = require('dateformat');
+const fs = require('fs');
+require('dotenv').config();
+
 const config = {
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
